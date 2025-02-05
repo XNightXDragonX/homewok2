@@ -1,7 +1,8 @@
 CREATE TABLE Employee (
 	employeeID SERIAL PRIMARY KEY,
-	employee_name VARCHAR(255) NOT NULL,
-	department VARCHAR(255) NOT NULL,
+	employee_name VARCHAR(255) NOT NULL CHECK (employee_name != ''),
+	department VARCHAR(255) NOT NULL CHECK (department != ''),
 	managerID INT,
-	FOREIGN KEY (managerID) REFERENCES Employee (employeeID) ON DELETE SET NULL
+	FOREIGN KEY (managerID) REFERENCES Employee (employeeID) ON DELETE SET NULL,
+	CHECK (managerID != eployeeID)
 );

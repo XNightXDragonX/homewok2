@@ -1,12 +1,12 @@
 CREATE TABLE Genre (
     genreID SERIAL PRIMARY KEY,
-    genre_name VARCHAR(255) NOT NULL
+    genre_name VARCHAR(255) NOT NULL UNIQUE
 );
 
 
 CREATE TABLE Artist (
     artistID SERIAL PRIMARY KEY,
-    artist_name VARCHAR(255) NOT NULL
+    artist_name VARCHAR(255) NOT NULL UNIQUE
 );
 
 
@@ -22,7 +22,7 @@ CREATE TABLE Genre_Artist (
 CREATE TABLE Album (
     albumID SERIAL PRIMARY KEY,
     album_name VARCHAR(255) NOT NULL,
-    album_year INT NOT NULL
+    album_year INT NOT NULL CHECK (album_year >= 1900)
 );
 
 
@@ -38,7 +38,7 @@ CREATE TABLE Artist_Album (
 CREATE TABLE Track (
     trackID SERIAL PRIMARY KEY,
     track_name VARCHAR(255) NOT NULL,
-    duration INT NOT NULL,
+    duration INT NOT NULL CHECK (duration > 0),
     albumID INT NOT NULL,
     FOREIGN KEY (albumID) REFERENCES Album (albumID) ON DELETE CASCADE
 );
@@ -47,7 +47,7 @@ CREATE TABLE Track (
 CREATE TABLE Collection (
     collectionID SERIAL PRIMARY KEY,
     collection_name VARCHAR(255) NOT NULL,
-    collection_year INT NOT NULL
+    collection_year INT NOT NULL CHECK (collection_year >= 1900)
 );
 
 
